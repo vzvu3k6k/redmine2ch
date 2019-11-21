@@ -3,21 +3,9 @@
 require 'datpot/thread'
 
 module Datpot
-  class Board
-    def threads
-      [
-        Thread.new(
-          dat_id: 1234,
-          title: '',
-          response_count: 1001
-        )
-      ]
-    end
-
+  class Board < Struct.new(:threads, keyword_init: true)
     def subject_txt
-      threads.map { |thread|
-        "#{thread.dat_id}.dat<>#{thread.title} (#{thread.response_count})"
-      }.join("\n") + "\n"
+      threads.map(&:subject_txt).join("\n") + "\n"
     end
   end
 end

@@ -5,22 +5,31 @@ require 'datpot/board'
 
 module Datpot
   class Bbs < Sinatra::Application
-    def subject_txt(_board_id)
+    def threads(board_id:)
       raise NotImplementedError
     end
 
-    def dat(_board_id, _dat_id)
+    def responses(board_id:, thread_id:)
       raise NotImplementedError
     end
 
     get '/:board_id/subject.txt' do
       content_type 'plain/text'
-      subject_txt(params['board_id']).encode('cp932')
+      board = Datpot::Board.new(
+        threads: threads(board_id: params['board_id'])
+      )
+      board.subject_txt.encode('cp932')
     end
 
-    get '/:board_id/dat/:dat_id.dat' do
+    get '/:board_id/dat/:thread_id.dat' do
       content_type 'plain/text'
-      dat(params['board_id'], params['dat_id']).encode('cp932')
+      thread = Datpot::Thread.new(
+        responses: responses(
+          board_id: params['board_id'],
+          thread_id: params['thread_id']
+        )
+      )
+      thread.dat.encode('cp932')
     end
   end
 end
