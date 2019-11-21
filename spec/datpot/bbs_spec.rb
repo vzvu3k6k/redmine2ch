@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'bbs'
+require 'datpot/bbs'
 require 'rack/test'
 
-RSpec.describe Bbs do
+RSpec.describe Datpot::Bbs do
   include Rack::Test::Methods
 
-  class App < Bbs
+  class App < Datpot::Bbs
     def subject_txt(*)
       Datpot::Board.new.subject_txt
     end

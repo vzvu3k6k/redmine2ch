@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'bbs'
+require 'datpot/bbs'
 
-class App < Bbs
+class App < Datpot::Bbs
   def subject_txt(*)
     Datpot::Board.new.subject_txt
   end
