@@ -5,13 +5,12 @@ require 'datpot/response'
 module Datpot
   class Thread < Struct.new(:thread_id, :title, :response_count, :responses, keyword_init: true)
     def subject_txt
-      "#{thread_id}.dat<>#{title} (#{response_count || responses.size})"
+      "#{thread_id}.dat<>#{title} (#{response_count || responses.size})\n"
     end
 
     def dat
-      "#{responses.first.dat}#{title}\n" +
-        responses.drop(1).map(&:dat).join("\n") +
-        "\n"
+      first, *rest = responses
+      ["#{first.dat.chomp}#{title}\n", *rest.map(&:dat)].join
     end
   end
 end

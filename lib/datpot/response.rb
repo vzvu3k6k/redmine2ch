@@ -3,7 +3,7 @@
 module Datpot
   class Response < Struct.new(:author, :email, :date, :id, :content, keyword_init: true)
     def dat
-      "#{author}<>#{email}<>#{date}<>#{content}<>"
+      "#{author}<>#{email}<>#{date}<>#{content}<>\n"
     end
   end
 end
