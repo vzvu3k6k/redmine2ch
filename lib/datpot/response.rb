@@ -8,7 +8,14 @@ module Datpot
     end
 
     def dat
-      "#{author}<>#{email}<>#{self.class.format_time(posted_at)}<>#{content}<>\n"
+      "#{author}<>#{email}<>#{meta}<>#{content}<>\n"
+    end
+
+    private
+
+    def meta
+      str = self.class.format_time(posted_at)
+      id ? "#{str} ID: #{id}" : str
     end
   end
 end
