@@ -21,8 +21,18 @@ RSpec.describe Datpot::Bbs do
 
     def responses(board_id:, thread_id:)
       [
-        Datpot::Response.new(author: '名無しさん', email: '', date: Date.new(2019, 1, 1), content: 'てすと'),
-        Datpot::Response.new(author: '名無しさん', email: '', date: Date.new(2019, 1, 2), content: '2get')
+        Datpot::Response.new(
+          author: '名無しさん',
+          email: '',
+          posted_at: Time.utc(1999, 5, 30, 0, 0),
+          content: 'てすと'
+        ),
+        Datpot::Response.new(
+          author: '名無しさん',
+          email: 'sage',
+          posted_at: Time.utc(1999, 5, 31, 0, 0),
+          content: '2get'
+        )
       ]
     end
   end
@@ -43,8 +53,8 @@ RSpec.describe Datpot::Bbs do
     it { expect(response.status).to eq 200 }
     it {
       expect(decoded_body).to eq <<~DAT
-        名無しさん<><>2019-01-01<>てすと<>
-        名無しさん<><>2019-01-02<>2get<>
+        名無しさん<><>1999/05/30(日) 00:00:00<>てすと<>
+        名無しさん<>sage<>1999/05/31(月) 00:00:00<>2get<>
       DAT
     }
   end

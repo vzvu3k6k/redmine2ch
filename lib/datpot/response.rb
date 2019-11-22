@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 module Datpot
-  class Response < Struct.new(:author, :email, :date, :id, :content, keyword_init: true)
+  class Response < Struct.new(:author, :email, :posted_at, :id, :content, keyword_init: true)
+    def self.format_time(time)
+      day = '日月火水木金土'[time.wday]
+      time.strftime("%Y/%m/%d(#{day}) %H:%M:%S")
+    end
+
     def dat
-      "#{author}<>#{email}<>#{date}<>#{content}<>\n"
+      "#{author}<>#{email}<>#{self.class.format_time(posted_at)}<>#{content}<>\n"
     end
   end
 end

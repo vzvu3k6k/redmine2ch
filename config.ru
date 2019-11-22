@@ -17,8 +17,18 @@ class App < Datpot::Bbs
 
   def responses(board_id:, thread_id:)
     [
-      Datpot::Response.new(author: '名無しさん', email: '', date: Date.today, content: 'てすと'),
-      Datpot::Response.new(author: '名無しさん', email: '', date: Date.today, content: '2get')
+      Datpot::Response.new(
+        author: '名無しさん',
+        email: '',
+        posted_at: Time.utc(1999, 5, 30, 0, 0),
+        content: 'てすと'
+      ),
+      Datpot::Response.new(
+        author: '名無しさん',
+        email: '',
+        posted_at: Time.utc(1999, 5, 31, 0, 0),
+        content: '2get'
+      )
     ]
   end
 end
