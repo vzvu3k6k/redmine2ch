@@ -12,3 +12,6 @@ group :test do
   gem 'rack-test'
   gem 'rspec', '~> 3.0'
 end
+
+gem 'faraday'
+gem 'faraday_middleware'
