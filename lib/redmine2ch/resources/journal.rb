@@ -7,15 +7,11 @@ module Redmine2ch
   module Resources
     class Journal < Base
       def author
-        @raw[:user][:name]
+        dig(:user, :name)
       end
 
       def created_on
-        Time.parse(@raw[:created_on])
-      end
-
-      def details
-        @raw[:details].map { |raw| Detail.new(raw) }
+        Time.parse(dig(:created_on))
       end
 
       def content
@@ -24,15 +20,23 @@ module Redmine2ch
 
       private
 
+      def notes
+        dig(:notes)
+      end
+
       def detail_content
         return if details.empty?
 
         details.map(&:content).join("\n")
       end
 
+      def details
+        dig(:details).map { |raw| Detail.new(raw) }
+      end
+
       class Detail < Base
         def content
-          "#{name}: #{old_value || "(NULL)"} -> #{new_value || "(NULL)"}"
+          "#{dig(:name)}: #{dig(:old_value) || "(NULL)"} -> #{dig(:new_value) || "(NULL)"}"
         end
       end
     end

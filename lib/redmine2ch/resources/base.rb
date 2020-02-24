@@ -9,9 +9,8 @@ module Redmine2ch
         @raw = raw
       end
 
-      # TODO: Raise NoMethodError when @raw doesn't have the key
-      def method_missing(name)
-        @raw[name]
+      def dig(*args)
+        @raw.dig(*args)
       end
     end
   end
