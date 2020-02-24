@@ -3,7 +3,7 @@
 require 'datpot/refinements/string'
 
 module Datpot
-  class Response < Struct.new(:author, :email, :posted_at, :id, :content, keyword_init: true)
+  Response = Struct.new(:author, :email, :posted_at, :id, :content, keyword_init: true) do
     using Datpot::Refinements::String
 
     def self.format_time(time)

@@ -3,7 +3,7 @@
 require 'datpot/thread'
 
 module Datpot
-  class Board < Struct.new(:threads, keyword_init: true)
+  Board = Struct.new(:threads, keyword_init: true) do
     def subject_txt
       threads.map(&:subject_txt).join
     end

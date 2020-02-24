@@ -3,7 +3,7 @@
 require 'datpot/response'
 
 module Datpot
-  class Thread < Struct.new(:thread_id, :title, :response_count, :responses, keyword_init: true)
+  Thread = Struct.new(:thread_id, :title, :response_count, :responses, keyword_init: true) do
     def subject_txt
       "#{thread_id}.dat<>#{title} (#{response_count || responses.size})\n"
     end
